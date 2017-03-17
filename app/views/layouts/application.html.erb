@@ -21,6 +21,14 @@
       </button>
       <a class="navbar-brand" href="/"><img src="http://socializedsoftware.com/wp-content/uploads/2010/08/configuration-management-gears.png" alt="Logo & Home" class="img-responsive center-block"></a>
     </div>
+    <div>
+     <%= form_tag "/products", method: :get, class: "navbar-form navbar-left" do %>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="search_term">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      <% end %>
+    </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -33,8 +41,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><%= link_to "Add New Product", "products/new", class: "btn btn-default" %></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
+            <li><a href="/products?attribute=price&order=asc">Sort by price ascending</a></li>
+            <li><a href="/products?attribute=price&order=desc">Sort by price descending</a></li>
+
+            <li><a href="/products/<%= Product.all.sample.id %>">Random</a></li>
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
             <li class="divider"></li>
