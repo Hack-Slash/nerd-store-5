@@ -1,8 +1,9 @@
   <section>
-    <div class="row">    
+    <div class="row">
       <div class="col-sm-8 col-sm-offset-2">
         <div class="product_single">
             <h2><%= @product.name %></h2>
+            <h2><%= @product.supplier.name %></h2>
             <p>Price: <%= @product.price %></p>
             <img src="<%= @product.image %>" alt="<%= @product.name %>" class="img-responsive">
             <p>Description: <%= @product.description %></p>
