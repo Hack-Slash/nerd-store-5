@@ -14,16 +14,20 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @suppliers = Supplier.all
   end
 
   def create
-    @product = Product.create(
+    @product = Product.new(
       name: params[:name],
       description: params[:description],
-      image: params[:image],
-      price: params[:price]
+      price: params[:price],
+      supplier_id: params[:supplier_id]
       )
-
+    @product.save
+    p '*' * 50
+    p @product.errors
+    p '*' * 50
     flash[:success] = "Product Created"
     redirect_to "/products/#{@product.id}"
   end
@@ -45,7 +49,6 @@ class ProductsController < ApplicationController
     @product.update(
       name: params[:name],
       description: params[:description],
-      image: params[:image],
       price: params[:price]
       )
 

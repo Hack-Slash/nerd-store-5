@@ -1,0 +1,5 @@
+my new form for an image
+<%= form_tag "/products/#{@product.id}/images", method: :post do %>
+  <input type="text" name="url">
+  <input type="submit" name="make a new image">
+<% end %>

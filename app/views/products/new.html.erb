@@ -10,20 +10,24 @@
                 <%= label_tag :name %>
                 <%= text_field_tag :name %>
               </div>
-              
+
               <div>
                 <%= label_tag :price %>
                 <%= text_field_tag :price %>
               </div>
-              
-              <div>
-                <%= label_tag :image %>
-                <%= text_field_tag :image %>
-              </div>
-              
+
               <div>
                 <%= label_tag :description %>
                 <%= text_field_tag :description %>
+              </div>
+
+              <div>
+                <label>Supplier Id</label>
+                <select name="supplier_id">
+                  <% @suppliers.each do |supplier| %>
+                    <option value="<%= supplier.id %>"><%= supplier.name %></option>
+                  <% end %>
+                </select>
               </div>
 
               <%= submit_tag "Process New Nerdiness" %>
