@@ -45,8 +45,10 @@
             <li><a href="/products?attribute=price&order=desc">Sort by price descending</a></li>
 
             <li><a href="/products/<%= Product.all.sample.id %>">Random</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
+            <% all_categories.each do |category| %>
+              <li><a href="/products?category=<%= category.name %>"><%= category.name %></a></li>
+            <% end %>
+
             <li class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>

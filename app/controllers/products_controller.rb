@@ -1,15 +1,21 @@
 class ProductsController < ApplicationController
+
   def index
-    if params[:attribute] && params[:order]
-      @products = Product.order(params[:attribute] => params[:order])
-    elsif params[:search_term]
-      @products = Product.where("name LIKE ?", "%#{params[:search_term]}%")
+    # if params[:attribute] && params[:order]
+    #   @products = Product.order(params[:attribute] => params[:order])
+    # elsif params[:search_term]
+    #   @products = Product.where("name LIKE ?", "%#{params[:search_term]}%")
+    # else
+    #   @products = Product.all
+    # end
+
+    # if params[:discount]
+    #   @products = Product.where("price < ?", "20")
+    # end
+    if params[:category]
+      @products = Category.find_by(name: params[:category]).products
     else
       @products = Product.all
-    end
-
-    if params[:discount]
-      @products = Product.where("price < ?", "20")
     end
   end
 
@@ -23,11 +29,8 @@ class ProductsController < ApplicationController
       description: params[:description],
       price: params[:price],
       supplier_id: params[:supplier_id]
-      )
+    )
     @product.save
-    p '*' * 50
-    p @product.errors
-    p '*' * 50
     flash[:success] = "Product Created"
     redirect_to "/products/#{@product.id}"
   end

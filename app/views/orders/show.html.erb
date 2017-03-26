@@ -1,0 +1,12 @@
+Here is the show
+<p>Order id: <%= @order.id + 736478231 %></p>
+<p>Order quantity: <%= @order.quantity %></p>
+<p>Order subtotal: <%= @order.subtotal %></p>
+<p>Order tax: <%= @order.tax %></p>
+<p>Order total: <%= @order.total %></p>
+<p>Order email address: <%= @order.user.email %></p>
+<p>Order's product name: <%= @order.product.name %></p>
+<p>Order's product image: <%= @order.product.images[0].url %></p>
+<p>Order's crated at: <%= @order.created_at %></p>
+
+8. On the Order show page, show the subtotal, tax, and total, as well as the email address of who ordered it, the product’s name, the product’s first image and when the purchase occurred.
