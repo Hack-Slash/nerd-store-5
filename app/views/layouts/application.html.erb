@@ -50,7 +50,9 @@
             <% end %>
 
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <% if current_user %>
+              <li><span class="glyphicon glyphicon-shopping-cart"><a href="/carted_products">Cart (<%= get_cart_count %>)</a></li>
+            <% end %>
           </ul>
         </li>
       </ul>

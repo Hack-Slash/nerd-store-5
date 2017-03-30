@@ -19,4 +19,13 @@ class ApplicationController < ActionController::Base
     redirect_to '/login' unless current_user
   end
 
+  def authenticate_admin!
+    redirect_to '/products' unless current_user && current_user.admin
+  end
+
+  def get_cart_count
+    current_user.carted_products.where(status: 'carted').length
+  end
+  helper_method :get_cart_count
+
 end

@@ -15,15 +15,21 @@
               <%= category.name %>
             <% end %>
             </p>
-            <%= link_to "Edit", "/products/#{@product.id}/edit", class: "btn btn-success" %>
-            <%= link_to "Delete", "/products/#{@product.id}", {method: :delete, class: "btn btn-danger" }%>
+
+            <% if current_user && current_user.admin %>
+              <%= link_to "Edit", "/products/#{@product.id}/edit", class: "btn btn-success" %>
+              <%= link_to "Delete", "/products/#{@product.id}", {method: :delete, class: "btn btn-danger" }%>
+            <% end %>
+
         </div>
-        <%= form_tag "/orders", method: :post do %>
-          <input type="text" name="quantity">
-          <p><input type="hidden" name="product_id" value="<%= @product.id %>"></p>
-          <input type="submit" value="Buy Now!">
+        <% if current_user %>
+          <%= form_tag "/carted_products", method: :post do %>
+            <input type="text" name="quantity">
+            <p><input type="hidden" name="product_id" value="<%= @product.id %>"></p>
+            <input type="submit" value="Add to cart!">
+          <% end %>
+          <a href="/products/<%= @product.id %>/images/new">Make a new photot for this one</a>
         <% end %>
       </div>
     </div>
-    <a href="/products/<%= @product.id %>/images/new">Make a new photot for this one</a>
   </section>
