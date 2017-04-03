@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
 
   def new
     @suppliers = Supplier.all
+    @product = Product.new
   end
 
   def create
@@ -30,9 +31,15 @@ class ProductsController < ApplicationController
       price: params[:price],
       supplier_id: params[:supplier_id]
     )
-    @product.save
-    flash[:success] = "Product Created"
-    redirect_to "/products/#{@product.id}"
+
+    image1 = Image.new(url: params[:url])
+    if @product.save && image1.save
+      flash[:success] = "Product Created"
+      redirect_to "/products/#{@product.id}"
+    else
+      @suppliers = Supplier.all
+      render 'new.html.erb'
+    end
   end
 
   def show
@@ -45,18 +52,23 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find_by(id: params[:id])
+    @suppliers = Supplier.all
+    render 'edit.html.erb'
   end
 
   def update
     @product = Product.find_by(id: params[:id])
-    @product.update(
-      name: params[:name],
-      description: params[:description],
-      price: params[:price]
-      )
-
-    flash[:success] = "Product Updated"
-    redirect_to "/products/#{@product.id}"
+    @suppliers = Supplier.all
+    if @product.update(
+         name: params[:name],
+         description: params[:description],
+         price: params[:price]
+       )
+      flash[:success] = "Product Updated"
+      redirect_to "/products/#{@product.id}"
+    else
+      render 'edit.html.erb'
+    end
   end
 
   def destroy
